@@ -1,18 +1,22 @@
 import logging
 import os
+import asyncio
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
 from telegram.ext import Application, CommandHandler, CallbackQueryHandler, MessageHandler, filters, ContextTypes
 
 # Настройка логирования
-logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
+logging.basicConfig(
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    level=logging.INFO
+)
 logger = logging.getLogger(__name__)
 
-# ⚠️ ВАЖНО: Токен будет взят из переменных окружения Railway
+# ⚠️ Токен из переменных окружения Render
 TOKEN = os.environ.get("TOKEN")
 if not TOKEN:
-    print("ОШИБКА: Токен не найден! Установите переменную окружения TOKEN в Railway")
-    exit(1)
-
+    # Для локального тестирования (удалите в продакшене)
+    TOKEN = "ВАШ_ТОКЕН_БОТА"
+    
 # Ваши данные
 ADMIN_CARD_NUMBER = "0000 0000 0000 0000"  # Замените на ваш номер карты
 
